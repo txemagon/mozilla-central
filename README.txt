@@ -1,3 +1,14 @@
+This patch prevent firefox from resolving symlinks whith the file://
+scheme.
+
+Just add the Boolean preference (in about:config):
+
+   network.file.allowSymlinks
+
+Set it to true.
+
+-----
+
 An explanation of the Mozilla Source Code Directory Structure and links to
 project pages with documentation can be found at:
 

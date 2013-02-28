@@ -22,7 +22,11 @@
 #include "nsIMIMEService.h"
 #include <algorithm>
 
+#include "mozilla/Preferences.h"
+
 //-----------------------------------------------------------------------------
+
+using namespace mozilla;
 
 class nsFileCopyEvent : public nsRunnable {
 public:
@@ -253,6 +257,7 @@ nsFileChannel::nsFileChannel(nsIURI *uri)
   bool symLink;
   nsCOMPtr<nsIFileURL> fileURL = do_QueryInterface(uri);
   if (fileURL && 
+      !Preferences::GetBool("network.file.allowSymlinks") &&
       NS_SUCCEEDED(fileURL->GetFile(getter_AddRefs(file))) &&
       NS_SUCCEEDED(file->IsSymlink(&symLink)) && 
       symLink &&
